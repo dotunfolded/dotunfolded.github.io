@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+    }
+
+    .dot {
+      width: 20px;
+      height: 20px;
+      background-color: red;
+      border-radius: 50%;
+      position: absolute;
+    }
+  </style>
+  <title>Smack the Dots</title>
+</head>
+<body>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const body = document.body;
+      const scoreDisplay = document.createElement('div');
+      scoreDisplay.innerText = 'Score: 0';
+      scoreDisplay.style.position = 'fixed';
+      scoreDisplay.style.top = '10px';
+      scoreDisplay.style.left = '10px';
+      body.appendChild(scoreDisplay);
+
+      let score = 0;
+
+      function createDot() {
+        const dot = document.createElement('div');
+        dot.className = 'dot';
+        dot.style.left = Math.random() * (window.innerWidth - 20) + 'px';
+        dot.style.top = Math.random() * (window.innerHeight - 20) + 'px';
+        dot.addEventListener('click', function() {
+          score++;
+          scoreDisplay.innerText = 'Score: ' + score;
+          body.removeChild(dot);
+          createDot();
+        });
+        body.appendChild(dot);
+      }
+
+      setInterval(createDot, 1000);
+    });
+  </script>
+</body>
+</html>
+
+
